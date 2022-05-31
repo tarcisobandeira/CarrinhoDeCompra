@@ -13,13 +13,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Handler;
 
 public class GerenciarProdutos {
     private JFrame ti = new JFrame();
     private JFrame tf = new JFrame();
-    JFrame tp = new JFrame();
-    JFrame tc = new JFrame();
+    private JFrame tp = new JFrame();
+    private JFrame tc = new JFrame();
+    private List<Fornecedor> listf = new ArrayList<>();
     public static void main(String[] args) throws InterruptedException {
 //        Contato c = new Contato("El Pablo", "(17)98880-2522", "elpablo@tabako.com");
 //        Fornecedor f = new Fornecedor(1,"El Pablo Tabakos", "Rua ComiNoMuro", "Mogi Mirim", "SP", c);
@@ -53,5 +56,29 @@ public class GerenciarProdutos {
 
     public void setTf(JFrame tf) {
         this.tf = tf;
+    }
+
+    public JFrame getTp() {
+        return tp;
+    }
+
+    public void setTp(JFrame tp) {
+        this.tp = tp;
+    }
+
+    public JFrame getTc() {
+        return tc;
+    }
+
+    public void setTc(JFrame tc) {
+        this.tc = tc;
+    }
+
+    public List<Fornecedor> getListf() {
+        return listf;
+    }
+
+    public void setListf(List<Fornecedor> listf) {
+        this.listf = listf;
     }
 }

@@ -17,11 +17,6 @@ public class TelaInicio{
             public void actionPerformed(ActionEvent e) {
                 GerenciarProdutos gp = new GerenciarProdutos();
                 TelaFornecedor telaFornecedor = new TelaFornecedor();
-                if(gp.getTi() == null){
-                    System.out.println("AAAAAAAA");
-                }else{
-                    System.out.println("BBBBBBBB");
-                }
                 gp.getTi().setVisible(false);
                 telaFornecedor.telaFornecedor(gp.getTf());
             }
