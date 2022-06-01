@@ -5,13 +5,13 @@ import models.Fornecedor;
 import models.Produto;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.ActionListener;
 
 public class TelaProduto {
-
 
     private JTabbedPane tabbedPane1;
     private JPanel panelTela;
@@ -25,25 +25,52 @@ public class TelaProduto {
     private JTextField pretxt;
     private JButton cancelarButton;
     private JButton salvarButton;
-
+    private JButton voltarButton;
     public TelaProduto(){
+        DefaultTableModel tm = new DefaultTableModel(0,4);
         startComboBox();
-        startTable();
+        startList(tm);
+        startTable(tm);
         salvarButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Produto p = new Produto(Integer.parseInt(codtxt.getText()), destxt.getText(), Double.parseDouble(pretxt.getText()), Integer.parseInt(quatxt.getText()), GerenciarProdutos.getListf().get(forbox.getSelectedIndex()-1));
-                GerenciarProdutos.getListp().add(p);
+                try{
+                    Produto p = new Produto(Integer.parseInt(codtxt.getText()), destxt.getText(), Double.parseDouble(pretxt.getText()), Integer.parseInt(quatxt.getText()), GerenciarProdutos.getListf().get(forbox.getSelectedIndex()-1));
+                    GerenciarProdutos.getListp().add(p);
+                    zerar();
+                    startTable(tm);
+                }catch (NullPointerException ex){
+                    System.out.println(ex.getMessage()+"\n");
+                }catch (Exception ex){
+                    System.out.println(ex.getMessage()+"\n");
+                }
+            }
+        });
+        voltarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GerenciarProdutos.getTp().setVisible(false);
+                GerenciarProdutos.getTi().setVisible(true);
                 zerar();
-                startTable();
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GerenciarProdutos.getTp().setVisible(false);
+                GerenciarProdutos.getTi().setVisible(true);
+                zerar();
             }
         });
     }
-
-    private void startTable() {
-        DefaultTableModel tm = new DefaultTableModel(0,4);
+    public void startList(DefaultTableModel tm){
         String c[] = {"Código", "Descrição", "Preço", "Quantidade", "Fornecedor"};
         tm.setColumnIdentifiers(c);
+    }
+    public void startTable(DefaultTableModel tm) {
+        if(table1.getRowCount() > 0){
+            tm.setRowCount(0);
+        }
         for(Produto p : GerenciarProdutos.getListp()){
             Object produtos[] = {p.getCodigo(), p.getDescricao(), p.getPreco(), p.getQuantidade(), p.getFornecedor().getRazaoSocial()};
             tm.addRow(produtos);
@@ -51,7 +78,7 @@ public class TelaProduto {
         }
     }
 
-    private void zerar() {
+    public void zerar() {
         codtxt.setText(null);
         destxt.setText(null);
         pretxt.setText(null);

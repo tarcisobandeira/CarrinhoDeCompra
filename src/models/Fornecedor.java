@@ -61,7 +61,7 @@ public class Fornecedor{
         this.estado = estado;
     }
 
-    public Contato getContrato() {
+    public Contato getContato() {
         return contato;
     }
 

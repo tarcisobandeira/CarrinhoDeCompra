@@ -5,8 +5,9 @@ import models.Contato;
 import models.Fornecedor;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
-import java.text.Normalizer;
+import java.awt.event.ActionListener;
 
 public class TelaFornecedor {
     private JPanel panelForn;
@@ -20,10 +21,17 @@ public class TelaFornecedor {
     private JTextField ematxt;
     private JButton salvarButton;
     private JButton cancelarButton;
-
+    private JTabbedPane tabbedPane1;
+    private JPanel fornecedorIn;
+    private JTable table1;
+    private JPanel fornecedorCreate;
+    private JButton voltarButton;
     private TelaInicio telaInicio;
-
+    DefaultTableModel tm = new DefaultTableModel(0,7);
     public TelaFornecedor() {
+        String c[] = {"Código", "Razão", "Endereço", "Cidade", "Estado", "Nome", "Telefone", "Email"};
+        tm.setColumnIdentifiers(c);
+        startTable();
         salvarButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,6 +39,7 @@ public class TelaFornecedor {
                     Contato c = new Contato(nometxt.getText(), teltxt.getText(), ematxt.getText());
                     Fornecedor f = new Fornecedor(Integer.parseInt(codtxt.getText()), rstxt.getText(), endtxt.getText(), cidtxt.getText(), esttxt.getText(), c);
                     GerenciarProdutos.getListf().add(f);
+                    startTable();
                     zerar();
                 }catch (NullPointerException np){
                     System.out.printf(np.getMessage()+"\n");
@@ -39,7 +48,6 @@ public class TelaFornecedor {
                 }
             }
         });
-
         cancelarButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,8 +56,15 @@ public class TelaFornecedor {
                 zerar();
             }
         });
+        voltarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GerenciarProdutos.getTf().setVisible(false);
+                GerenciarProdutos.getTi().setVisible(true);
+                zerar();
+            }
+        });
     }
-
     public void telaFornecedor(JFrame tf){
         tf.setContentPane(new TelaFornecedor().getPanelForn());
         tf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -57,7 +72,14 @@ public class TelaFornecedor {
         tf.setTitle("Fornecedor");
         tf.setVisible(true);
     }
-
+    private void startTable() {
+        for(Fornecedor f : GerenciarProdutos.getListf()){
+            Object fornecedor[] = {f.getCodigo(), f.getRazaoSocial(), f.getEndereco(), f.getCidade(), f.getEstado(), f.getContato().getNome(),
+                    f.getContato().getTelefone(), f.getContato().getEmail()};
+            tm.addRow(fornecedor);
+            table1.setModel(tm);
+        }
+    }
     public void zerar(){
         cidtxt.setText(null);
         teltxt.setText(null);
@@ -156,5 +178,4 @@ public class TelaFornecedor {
     public void setCancelarButton(JButton cancelarButton) {
         this.cancelarButton = cancelarButton;
     }
-
 }
