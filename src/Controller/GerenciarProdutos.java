@@ -18,67 +18,75 @@ import java.util.List;
 import java.util.logging.Handler;
 
 public class GerenciarProdutos {
-    private JFrame ti = new JFrame();
-    private JFrame tf = new JFrame();
-    private JFrame tp = new JFrame();
-    private JFrame tc = new JFrame();
-    private List<Fornecedor> listf = new ArrayList<>();
+    private static JFrame ti = new JFrame();
+    private static JFrame tf = new JFrame();
+    private static JFrame tp = new JFrame();
+    private static JFrame tc = new JFrame();
+    private static List<Fornecedor> listf = new ArrayList<>();
+    private static List<Produto> listp = new ArrayList<>();
+
     public static void main(String[] args) throws InterruptedException {
-//        Contato c = new Contato("El Pablo", "(17)98880-2522", "elpablo@tabako.com");
-//        Fornecedor f = new Fornecedor(1,"El Pablo Tabakos", "Rua ComiNoMuro", "Mogi Mirim", "SP", c);
-//        Produto p = new Produto(1,"Nargas", 150.00, 1000, f);
-//        Produto p2 = new Produto(2, "Fumo", 10, 60, f);
+        Contato c = new Contato("El Pablo", "(17)98880-2522", "elpablo@tabako.com");
+        Fornecedor f = new Fornecedor(1,"El Pablo Tabakos", "Rua ComiNoMuro", "Mogi Mirim", "SP", c);
+        listf.add(f);
+        Produto p = new Produto(1,"Nargas", 150.00, 1000, f);
+        Produto p2 = new Produto(2, "Fumo", 10, 60, f);
+        listp.add(p);
+        listp.add(p2);
 //
 //        Cesta cesta = new Cesta();
 //        cesta.addLista(p, 10);
 //        cesta.addLista(p2, 5);
 //        cesta.exibirLista();
-        GerenciarProdutos gp = new GerenciarProdutos();
-        TelaFornecedor telaFornecedor = new TelaFornecedor();
-
         TelaInicio telaInicio = new TelaInicio();
-
-        telaInicio.telaInicio(gp.getTi());
-
+        telaInicio.telaInicio(ti);
     }
 
-    public JFrame getTi() {
+    public static JFrame getTi() {
         return ti;
     }
 
-    public void setTi(JFrame ti) {
-        this.ti = ti;
+    public static void setTi(JFrame ti) {
+        GerenciarProdutos.ti = ti;
     }
 
-    public JFrame getTf() {
+    public static JFrame getTf() {
         return tf;
     }
 
-    public void setTf(JFrame tf) {
-        this.tf = tf;
+    public static void setTf(JFrame tf) {
+        GerenciarProdutos.tf = tf;
     }
 
-    public JFrame getTp() {
+    public static JFrame getTp() {
         return tp;
     }
 
-    public void setTp(JFrame tp) {
-        this.tp = tp;
+    public static void setTp(JFrame tp) {
+        GerenciarProdutos.tp = tp;
     }
 
-    public JFrame getTc() {
+    public static JFrame getTc() {
         return tc;
     }
 
-    public void setTc(JFrame tc) {
-        this.tc = tc;
+    public static void setTc(JFrame tc) {
+        GerenciarProdutos.tc = tc;
     }
 
-    public List<Fornecedor> getListf() {
+    public static List<Fornecedor> getListf() {
         return listf;
     }
 
-    public void setListf(List<Fornecedor> listf) {
-        this.listf = listf;
+    public static void setListf(List<Fornecedor> listf) {
+        GerenciarProdutos.listf = listf;
+    }
+
+    public static List<Produto> getListp() {
+        return listp;
+    }
+
+    public static void setListp(List<Produto> listp) {
+        GerenciarProdutos.listp = listp;
     }
 }

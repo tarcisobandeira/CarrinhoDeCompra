@@ -8,6 +8,10 @@ public class Fornecedor{
     private String estado;
     private Contato contato;
 
+    public Fornecedor(){
+
+    }
+
     public Fornecedor(int codigo, String razaoSocial, String endereco, String cidade, String estado, Contato contato) {
         this.codigo = codigo;
         this.razaoSocial = razaoSocial;

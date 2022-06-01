@@ -21,19 +21,31 @@ public class TelaFornecedor {
     private JButton salvarButton;
     private JButton cancelarButton;
 
+    private TelaInicio telaInicio;
+
     public TelaFornecedor() {
-        GerenciarProdutos gp = new GerenciarProdutos();
         salvarButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Contato c = new Contato(nometxt.getText(), teltxt.getText(), ematxt.getText());
-                Fornecedor f = new Fornecedor(Integer.parseInt(codtxt.getText()), rstxt.getText(), endtxt.getText(), cidtxt.getText(), esttxt.getText(), c);
-                gp.getListf().add(f);
-                for (Fornecedor forn : gp.getListf()){
-                    System.out.println(forn.getContrato().getNome());
-                    System.out.println(forn.getContrato().getTelefone());
-                    System.out.println(forn.getContrato().getEmail());
+                try {
+                    Contato c = new Contato(nometxt.getText(), teltxt.getText(), ematxt.getText());
+                    Fornecedor f = new Fornecedor(Integer.parseInt(codtxt.getText()), rstxt.getText(), endtxt.getText(), cidtxt.getText(), esttxt.getText(), c);
+                    GerenciarProdutos.getListf().add(f);
+                    zerar();
+                }catch (NullPointerException np){
+                    System.out.printf(np.getMessage()+"\n");
+                }catch (Exception np){
+                    System.out.printf(np.getMessage()+"\n");
                 }
+            }
+        });
+
+        cancelarButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GerenciarProdutos.getTf().setVisible(false);
+                GerenciarProdutos.getTi().setVisible(true);
+                zerar();
             }
         });
     }
@@ -44,6 +56,17 @@ public class TelaFornecedor {
         tf.setSize(600,600);
         tf.setTitle("Fornecedor");
         tf.setVisible(true);
+    }
+
+    public void zerar(){
+        cidtxt.setText(null);
+        teltxt.setText(null);
+        codtxt.setText(null);
+        ematxt.setText(null);
+        endtxt.setText(null);
+        esttxt.setText(null);
+        nometxt.setText(null);
+        rstxt.setText(null);
     }
 
     public JPanel getPanelForn() {

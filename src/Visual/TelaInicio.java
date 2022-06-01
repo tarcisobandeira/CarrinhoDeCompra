@@ -15,10 +15,27 @@ public class TelaInicio{
         fornecedorButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GerenciarProdutos gp = new GerenciarProdutos();
                 TelaFornecedor telaFornecedor = new TelaFornecedor();
-                gp.getTi().setVisible(false);
-                telaFornecedor.telaFornecedor(gp.getTf());
+                GerenciarProdutos.getTi().setVisible(false);
+                telaFornecedor.telaFornecedor(GerenciarProdutos.getTf());
+            }
+        });
+
+        produtoButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaProduto telaProduto = new TelaProduto();
+                GerenciarProdutos.getTi().setVisible(false);
+                telaProduto.telaProduto(GerenciarProdutos.getTp());
+            }
+        });
+
+        carrinhoButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaCarrinho telaCarrinho = new TelaCarrinho();
+                GerenciarProdutos.getTi().setVisible(false);
+                telaCarrinho.telaCarrinho(GerenciarProdutos.getTc());
             }
         });
     }
