@@ -9,6 +9,10 @@ public class ItensCesta {
         this.quantidade = quantidade;
     }
 
+    public ItensCesta() {
+
+    }
+
     public Produto getProduto() {
         return produto;
     }
@@ -27,6 +31,6 @@ public class ItensCesta {
 
     @Override
     public String toString() {
-        return "Produto: " + produto.getDescricao() + " | R$: " + produto.getPreco() + " | Quantidade: " + getQuantidade() + " | Fornecedor: " + produto.getFornecedor().getRazaoSocial() + "\n";
+        return "Produto: " + produto.getDescricao() + " | Valor: R$" + produto.getPreco() + " | Quantidade: " + getQuantidade() + " | Total: R$" + (getQuantidade() * produto.getPreco()) + "\n";
     }
 }

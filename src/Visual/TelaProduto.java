@@ -1,6 +1,7 @@
 package Visual;
 
 import Controller.GerenciarProdutos;
+import com.sun.source.tree.ParenthesizedTree;
 import models.Fornecedor;
 import models.Produto;
 
@@ -8,8 +9,10 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Parameter;
 
 public class TelaProduto {
 
@@ -39,10 +42,13 @@ public class TelaProduto {
                     GerenciarProdutos.getListp().add(p);
                     zerar();
                     startTable(tm);
+                    JOptionPane.showMessageDialog(null, "Produto: " + p.getDescricao() + " foi adicionado com sucesso.");
                 }catch (NullPointerException ex){
                     System.out.println(ex.getMessage()+"\n");
+                    JOptionPane.showMessageDialog(null, "Você não preencheu todos os campos.");
                 }catch (Exception ex){
                     System.out.println(ex.getMessage()+"\n");
+                    JOptionPane.showMessageDialog(null, "Tente fazer a ação mais uma vez ou contate um administrador.");
                 }
             }
         });

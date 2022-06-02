@@ -3,10 +3,7 @@ package Controller;
 import Visual.TelaFornecedor;
 import Visual.TelaInicio;
 import com.sun.net.httpserver.Headers;
-import models.Cesta;
-import models.Contato;
-import models.Fornecedor;
-import models.Produto;
+import models.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +21,7 @@ public class GerenciarProdutos {
     private static JFrame tc = new JFrame();
     private static List<Fornecedor> listf = new ArrayList<>();
     private static List<Produto> listp = new ArrayList<>();
-
+    private static List<ItensCesta> listic = new ArrayList<>();
     public static void main(String[] args) throws InterruptedException {
         Contato c = new Contato("El Pablo", "(17)98880-2522", "elpablo@tabako.com");
         Fornecedor f = new Fornecedor(1,"El Pablo Tabakos", "Rua ComiNoMuro", "Mogi Mirim", "SP", c);
@@ -88,5 +85,13 @@ public class GerenciarProdutos {
 
     public static void setListp(List<Produto> listp) {
         GerenciarProdutos.listp = listp;
+    }
+
+    public static List<ItensCesta> getListic() {
+        return listic;
+    }
+
+    public static void setListic(List<ItensCesta> listic) {
+        GerenciarProdutos.listic = listic;
     }
 }

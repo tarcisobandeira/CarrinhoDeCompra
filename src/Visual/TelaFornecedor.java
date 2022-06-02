@@ -27,11 +27,11 @@ public class TelaFornecedor {
     private JPanel fornecedorCreate;
     private JButton voltarButton;
     private TelaInicio telaInicio;
-    DefaultTableModel tm = new DefaultTableModel(0,7);
     public TelaFornecedor() {
+        DefaultTableModel tm = new DefaultTableModel(0,7);
         String c[] = {"Código", "Razão", "Endereço", "Cidade", "Estado", "Nome", "Telefone", "Email"};
         tm.setColumnIdentifiers(c);
-        startTable();
+        startTable(tm);
         salvarButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,12 +39,15 @@ public class TelaFornecedor {
                     Contato c = new Contato(nometxt.getText(), teltxt.getText(), ematxt.getText());
                     Fornecedor f = new Fornecedor(Integer.parseInt(codtxt.getText()), rstxt.getText(), endtxt.getText(), cidtxt.getText(), esttxt.getText(), c);
                     GerenciarProdutos.getListf().add(f);
-                    startTable();
+                    startTable(tm);
                     zerar();
-                }catch (NullPointerException np){
-                    System.out.printf(np.getMessage()+"\n");
-                }catch (Exception np){
-                    System.out.printf(np.getMessage()+"\n");
+                    JOptionPane.showMessageDialog(null, "Fornecedor: " + f.getRazaoSocial() + " foi adicionado com sucesso.");
+                }catch (NullPointerException ex){
+                    System.out.println(ex.getMessage()+"\n");
+                    JOptionPane.showMessageDialog(null, "Você não preencheu todos os campos.");
+                }catch (Exception ex){
+                    System.out.println(ex.getMessage()+"\n");
+                    JOptionPane.showMessageDialog(null, "Tente fazer a ação mais uma vez ou contate um administrador.");
                 }
             }
         });
@@ -72,7 +75,10 @@ public class TelaFornecedor {
         tf.setTitle("Fornecedor");
         tf.setVisible(true);
     }
-    private void startTable() {
+    private void startTable(DefaultTableModel tm) {
+        if(table1.getRowCount() > 0){
+            tm.setRowCount(0);
+        }
         for(Fornecedor f : GerenciarProdutos.getListf()){
             Object fornecedor[] = {f.getCodigo(), f.getRazaoSocial(), f.getEndereco(), f.getCidade(), f.getEstado(), f.getContato().getNome(),
                     f.getContato().getTelefone(), f.getContato().getEmail()};
