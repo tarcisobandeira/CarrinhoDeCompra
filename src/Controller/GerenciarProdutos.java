@@ -26,7 +26,7 @@ public class GerenciarProdutos {
         Contato c = new Contato("El Pablo", "(17)98880-2522", "elpablo@tabako.com");
         Fornecedor f = new Fornecedor(1,"El Pablo Tabakos", "Rua ComiNoMuro", "Mogi Mirim", "SP", c);
         listf.add(f);
-        Produto p = new Produto(1,"Nargas", 150.00, 1000, f);
+        Produto p = new Produto(1,"Narguile", 150.00, 1000, f);
         Produto p2 = new Produto(2, "Fumo", 10, 60, f);
         listp.add(p);
         listp.add(p2);
